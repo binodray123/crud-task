@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/companies/create',[CompanyController::class, 'create'])->name('companies.create');
+Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
+Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
+Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
+
+
+// Route::get('test', [TestController::class, 'test']);
+Route::get('test/{name}/{age}', [TestController::class, 'test']);

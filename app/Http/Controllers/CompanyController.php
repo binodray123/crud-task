@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyStoreRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        $companies = Company::latest()->get();
+        return view('company.index',compact('companies'));
     }
 
     /**
@@ -33,9 +35,18 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CompanyStoreRequest $request)
     {
-        //
+        $input = $request->all();
+        if ($logo = $request->file('logo'))
+        {
+            $destinationPath = 'logo/';
+            $profileImage = date('YmdHis') . "." . $logo->getClientOriginalExtension();
+            $logo->move($destinationPath, $profileImage);
+            $input['logo'] = "$profileImage";
+        }
+        Company::create($input);
+        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
     }
 
     /**
