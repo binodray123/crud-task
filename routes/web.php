@@ -27,6 +27,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
+Route::get('/companies/{company}/edit',[CompanyController::class, 'edit'])->name('companies.edit');
+Route::post('/companies/{company}/update',[CompanyController::class, 'update'])->name('companies.update');
+Route::delete('/companies/{company}/destroy',[CompanyController::class, 'destroy'])->name('companies.destroy');
 
 
 // Route::get('test', [TestController::class, 'test']);

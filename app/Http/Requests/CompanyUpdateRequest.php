@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CompanyStoreRequest extends FormRequest
+class CompanyUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,6 @@ class CompanyStoreRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email',
-            "logo" => 'required|image|mimes:png,jpg|min:100|max:2048'
         ];
     }
 }

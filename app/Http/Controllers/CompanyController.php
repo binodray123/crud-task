@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyStoreRequest;
+use App\Http\Requests\CompanyUpdateRequest;
 use App\Models\Company;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CompanyController extends Controller
 {
@@ -15,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::latest()->get();
+        $companies = Company::latest()->paginate(5);
         return view('company.index',compact('companies'));
     }
 
@@ -38,15 +39,17 @@ class CompanyController extends Controller
     public function store(CompanyStoreRequest $request)
     {
         $input = $request->all();
-        if ($logo = $request->file('logo'))
+
+        if ($request->hasFile('logo'))
         {
-            $destinationPath = 'logo/';
-            $profileImage = date('YmdHis') . "." . $logo->getClientOriginalExtension();
-            $logo->move($destinationPath, $profileImage);
-            $input['logo'] = "$profileImage";
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move('upload/logo/',$filename);
+            $input['logo'] = $filename;
         }
         Company::create($input);
-        return redirect()->route('companies.index')->with('success', 'Company created successfully.');
+        return back()->with('success', 'Company created successfully.');
     }
 
     /**
@@ -68,7 +71,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return view('company.edit', compact('company'));
     }
 
     /**
@@ -78,9 +81,27 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Company $company)
+    public function update(CompanyUpdateRequest $request, Company $company)
     {
-        //
+        $input = $request->all();
+
+        if($request->hasFile('logo'))
+        {
+            $destination = 'upload/logo/' .$company->logo;
+            if(File::exists($destination))
+            {
+                File::delete($destination);
+            }
+            $file = $request->file('logo');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time().'.' .$extension;
+            $file->move('upload/logo/', $filename);
+            $input['logo'] = $filename;
+
+        }
+
+        $company->update($input);
+        return redirect()->route('companies.index')->with('success', 'Company updated successfully');
     }
 
     /**
@@ -89,8 +110,17 @@ class CompanyController extends Controller
      * @param  \App\Models\Company  $company
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Company $company)
+    public function destroy($id)
     {
-        //
+        $company =Company::find($id);
+        $destination = 'upload/logo/' .$company->logo;
+        if (File::exists($destination))
+        {
+            File::delete($destination);
+        }
+
+        $company->delete();
+
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully!');
     }
 }
