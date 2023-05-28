@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('companies.create')}}" class="btn btn-primary">Add Company</a>
+                    <a href="{{route('home')}}" class="btn btn-danger btn-xs py-1 float-end">Back</a>
                 </div>
 
                 <div class="card-body">
