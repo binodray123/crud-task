@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Route for Company
 Route::get('/companies', [CompanyController::class, 'index'])->name('companies.index');
 Route::get('/companies/create', [CompanyController::class, 'create'])->name('companies.create');
 Route::post('/companies', [CompanyController::class, 'store'])->name('companies.store');
 Route::get('/companies/{company}/edit',[CompanyController::class, 'edit'])->name('companies.edit');
 Route::post('/companies/{company}/update',[CompanyController::class, 'update'])->name('companies.update');
 Route::delete('/companies/{company}/destroy',[CompanyController::class, 'destroy'])->name('companies.destroy');
+
+//Route for Employee
+
+Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 
 
 // Route::get('test', [TestController::class, 'test']);

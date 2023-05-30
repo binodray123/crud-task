@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeStoreRequest;
+use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -24,7 +26,8 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('employee.create', compact('companies'));
     }
 
     /**
@@ -33,9 +36,11 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeStoreRequest $request)
     {
-        //
+        $input = $request->all();
+        Employee::create($input);
+        return back()->with('success', 'Employee created successfully!');
     }
 
     /**
