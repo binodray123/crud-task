@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                    <strong>Create Employee</strong>
-                   <a href="" class="btn btn-danger btn-xs py-1 float-end">Back</a>
+                   <a href="{{route('home')}}" class="btn btn-danger btn-xs py-1 float-end">Back</a>
                 </div>
                 @if ($message = Session::get('success'))
                         <div class="alert alert-success" role="alert">

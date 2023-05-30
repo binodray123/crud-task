@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <a href="{{route('companies.index')}}" class="btn btn-primary">Company</a>
-                    <a href="" class="btn btn-secondary">Employee</a>
+                    <a href="{{route('employees.index')}}" class="btn btn-secondary">Employee</a>
                 </div>
 
                 <div class="card-body">
