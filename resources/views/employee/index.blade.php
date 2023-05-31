@@ -34,7 +34,7 @@
                                 <td>{{$employee->phone}}</td>
                                 <td>
                                     <a href="{{route('employees.edit', $employee)}}" class="btn btn-warning btn-xs py-1">Edit</a>
-                                    <form action="" method="post">
+                                    <form action="{{route('employees.destroy',$employee)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-xs py-1 ">Delete</a>

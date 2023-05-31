@@ -18,7 +18,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::latest()->paginate(10);
-        return view('employee.index',compact('employees'));
+        return view('employee.index', compact('employees'));
     }
 
     /**
@@ -90,6 +90,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+
+        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully!');
     }
 }

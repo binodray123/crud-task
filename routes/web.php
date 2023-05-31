@@ -40,6 +40,7 @@ Route::get('/employees/create', [EmployeeController::class, 'create'])->name('em
 Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 Route::get('/employees/{employee}/edit',[EmployeeController::class, 'edit'])->name('employees.edit');
 Route::post('/employees/{employee}/update',[EmployeeController::class, 'update'])->name('employees.update');
+Route::delete('/employees/{employee}/destroy',[EmployeeController::class, 'destroy'])->name('employees.destroy');
 
 
 // Route::get('test', [TestController::class, 'test']);
