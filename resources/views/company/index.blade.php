@@ -31,11 +31,11 @@
                                 <td>{{$company->email}}</td>
                                 <td><img src="{{asset('upload/logo/' .$company->logo)}}" width="100px" height="100"></td>
                                 <td>
-                                    <a href="{{route('companies.edit',$company)}}" class="btn btn-warning btn-xs py-1">Edit</a>
+                                    <a href="{{route('companies.edit',$company)}}" class="btn btn-xs py-1"><i class="fa-solid fa-pen-to-square"></i>edit</a>
                                     <form action="{{route('companies.destroy', $company)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-xs py-1 ">Delete</a>
+                                        <button type="submit" class="btn  btn-xs py-1 "> <i class="fa-solid fa-trash" style="color: #e40707;"></i>delete</a>
                                     </form>
                                 </td>
                             </tr>
