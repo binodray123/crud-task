@@ -23,7 +23,8 @@
                             <th>Last Name</th>
                             <th>Email </th>
                             <th>Phone Number</th>
-                            <th>Action</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                         <tbody>
                             @foreach ($employees as $employee)
@@ -33,11 +34,13 @@
                                 <td>{{$employee->email}}</td>
                                 <td>{{$employee->phone}}</td>
                                 <td>
-                                    <a href="{{route('employees.edit', $employee)}}" class="btn btn-warning btn-xs py-1">Edit</a>
+                                    <a href="{{route('employees.edit', $employee)}}" class="btn  btn-xs py-1 "> <i class="fa-solid fa-pen-to-square"></i></a>
+                                </td>
+                                <td>
                                     <form action="{{route('employees.destroy',$employee)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-xs py-1 ">Delete</a>
+                                        <button type="submit" class="btn  btn-xs py-1 "> <i class="fa-solid fa-trash" style="color: #e40707;"></i></button>
                                     </form>
                                 </td>
                             </tr>
@@ -46,7 +49,7 @@
 
                     </table>
                     <div class="row">
-                    {{ $employees->links() }}
+                        {{ $employees->links() }}
                     </div>
                 </div>
             </div>
