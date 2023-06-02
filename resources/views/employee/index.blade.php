@@ -19,8 +19,10 @@
 
                     <table class="table table-border">
                         <tr>
+                            <th>S.No.</th>
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Company Name</th>
                             <th>Email </th>
                             <th>Phone Number</th>
                             <th>Edit</th>
@@ -29,13 +31,16 @@
                         <tbody>
                             @foreach ($employees as $employee)
                             <tr>
+                                <td>{{$loop->iteration}}</td>
                                 <td>{{$employee->first_name}}</td>
                                 <td>{{$employee->last_name}}</td>
+                                <td>{{$employee->company->name}}</td>
                                 <td>{{$employee->email}}</td>
                                 <td>{{$employee->phone}}</td>
                                 <td>
                                     <a href="{{route('employees.edit', $employee)}}" class="btn  btn-xs py-1 "> <i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
+
                                 <td>
                                     <form action="{{route('employees.destroy',$employee)}}" method="post">
                                         @csrf

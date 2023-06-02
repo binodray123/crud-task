@@ -13,4 +13,9 @@ class Company extends Model
         'email',
         'logo',
     ];
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }
